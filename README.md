@@ -1,6 +1,8 @@
 i-spy
 =====
 
+[![Build Status](https://travis-ci.org/7digital/i-spy.png?branch=master)](http://travis-ci.org/7digital/i-spy)
+
 A super simple spying library that mimics the jasmine spy API for use with
 other frameworks.  Doesn't force you into the stub / mock / fake choice like
 sinon.js.
