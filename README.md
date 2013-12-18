@@ -9,9 +9,11 @@ Wrapped in the UMD node adaptor for use from requirejs or nodejs.
 
 Installation (nodejs)
 ---------------------
+This module is currently under development you should install it with a git
+URL for now.
 
 ```bash
-  npm install i-spy
+  npm install https://github.com/7digital/i-spy
 ```
 
 Usage
