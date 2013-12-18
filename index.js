@@ -31,6 +31,10 @@ define(function (require, exports, module) {
 		spy.wasNotCalled = function wasNotCalled() {
 			return spy.calls.length === 0;
 		};
+		spy.thatThrows = function thatThrows(err) {
+			fake = function () { throw err; };
+			return spy;
+		};
 
 		return spy;
 	}

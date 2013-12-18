@@ -87,6 +87,15 @@ describe('spy', function () {
 			assert.equal(spy('foo'), 'foo', 'expected same return value');
 		})
 
+		it('throws the given error', function () {
+			var expectedErr = new Error('Oh noes');
+			var spy = iSpy.createSpy().thatThrows(expectedErr);
+
+			assert.throws(function () {
+				spy('foo')
+			},Error, 'Oh noes', 'expected same error');
+		});
+
 	});
 
 
