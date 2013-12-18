@@ -1,0 +1,29 @@
+{
+  "name": "i-spy",
+  "version": "0.0.1",
+  "description": "Minimal spy library with pass-through",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:7digital/i-spy.git"
+  },
+  "keywords": [
+    "spies",
+    "mocha",
+    "test",
+    "spy"
+  ],
+  "author": "7digital",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/7digital/i-spy/issues"
+  },
+  "homepage": "https://github.com/7digital/i-spy",
+  "devDependencies": {
+    "mocha": "~1.15.1",
+    "chai": "~1.8.1"
+  }
+}
