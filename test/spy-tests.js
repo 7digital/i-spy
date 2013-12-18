@@ -1,4 +1,4 @@
-var spyModule = require('../index');
+var iSpy = require('../index');
 var assert = require('chai').assert;
 
 describe('spy', function () {
@@ -7,7 +7,7 @@ describe('spy', function () {
 		var spy;
 
 		beforeEach(function () {
-			spy = spyModule.createSpy();
+			spy = iSpy.createSpy();
 		});
 
 		it('returns a function that records its calls', function () {
@@ -54,7 +54,7 @@ describe('spy', function () {
 
 		it('calls the fake function', function () {
 			var wasCalled = false;
-			var spy = spyModule.createSpy(function () {
+			var spy = iSpy.createSpy(function () {
 				wasCalled = true;
 			});
 			spy();
@@ -65,7 +65,7 @@ describe('spy', function () {
 		it('sets the context on the fake', function () {
 			var expectedContext = { ctx: 'fake' };
 			var actualContext = false;
-			var spy = spyModule.createSpy(function () {
+			var spy = iSpy.createSpy(function () {
 				actualContext = this;
 			});
 			spy.bind(expectedContext)();
@@ -74,7 +74,7 @@ describe('spy', function () {
 		});
 
 		it('returns the value returned by the fake', function () {
-			var spy = spyModule.createSpy(function () {
+			var spy = iSpy.createSpy(function () {
 				return 42;
 			});
 			var returnValue = spy();
@@ -82,7 +82,7 @@ describe('spy', function () {
 		});
 
 		it('returns the object supplied', function () {
-			var spy = spyModule.createSpy('foo');
+			var spy = iSpy.createSpy('foo');
 
 			assert.equal(spy('foo'), 'foo', 'expected same return value');
 		})
