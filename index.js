@@ -8,11 +8,23 @@ if (typeof module === 'object' && typeof define !== 'function') {
 
 define(function (require, exports, module) {
 
+	function thrower(err) {
+		return function () { throw err; }
+	}
+
+	function returner(obj) {
+		return function () { return obj; }
+	}
+
 	function createSpy(fn) {
 		var fake = fn;
 
 		if (fake !== void 0 && typeof(fn) !== 'function') {
-			fake = function () { return fn; }
+			if (fn instanceof Error) {
+				fake = thrower(fn);
+			} else {
+				fake = returner(fn);
+			}
 		}
 
 		function spy() {
@@ -21,18 +33,36 @@ define(function (require, exports, module) {
 			spy.context = this;
 			return fake && fake.apply(spy.context, spyArgs);
 		}
+
+		// Checkers
 		spy.calls = [];
+
 		spy.reset = function reset() {
 			spy.calls = [];
 		};
+
 		spy.wasCalled = function wasCalled() {
 			return spy.calls.length > 0;
 		};
+
 		spy.wasNotCalled = function wasNotCalled() {
 			return spy.calls.length === 0;
 		};
+
+
+		// Fluent interface
 		spy.thatThrows = function thatThrows(err) {
-			fake = function () { throw err; };
+			fake = thrower(err);
+			return spy;
+		};
+
+		spy.thatReturns = function thatThrows(err) {
+			fake = returner(err);
+			return spy;
+		};
+
+		spy.thatCalls = function thatCalls(fn) {
+			fake = fn;
 			return spy;
 		};
 

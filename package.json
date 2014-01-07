@@ -1,6 +1,6 @@
 {
   "name": "i-spy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Minimal spy library with pass-through",
   "main": "index.js",
   "scripts": {

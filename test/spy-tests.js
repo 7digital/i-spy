@@ -87,6 +87,34 @@ describe('spy', function () {
 			assert.equal(spy('foo'), 'foo', 'expected same return value');
 		})
 
+		it('throws the error supplied', function () {
+			var err = new Error('Oh noes');
+			var spy = iSpy.createSpy(err);
+
+			assert.throws(function () {
+				spy('foo')
+			},Error, 'Oh noes', 'expected same error');
+		})
+
+	});
+
+	describe('fluent api', function () {
+
+		it('calls the fake suppplied by the fluent call', function () {
+			var spy = iSpy.createSpy(666).thatCalls(function () {
+				return 42;
+			});
+
+			var returnValue = spy();
+			assert.equal(returnValue, 42);
+		});
+
+		it('returns the object supplied', function () {
+			var spy = iSpy.createSpy().thatReturns('foo');
+
+			assert.equal(spy('foo'), 'foo', 'expected same return value');
+		})
+
 		it('throws the given error', function () {
 			var expectedErr = new Error('Oh noes');
 			var spy = iSpy.createSpy().thatThrows(expectedErr);

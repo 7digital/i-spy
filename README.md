@@ -21,6 +21,8 @@ URL for now.
 Usage
 -----
 
+Simple usage:
+
 ```javascript
    var iSpy = require('i-spy');
    var spy = iSpy.createSpy(function fake() {
@@ -40,4 +42,41 @@ Usage
    });
 ```
 
-See the tests for more complete usage examples.
+Asynchronous tests:
+
+```javascript
+   var iSpy = require('i-spy');
+
+   describe('frobnicator', function () {
+
+      it('frobnicates', function (done) {
+        var spy = iSpy.createSpy(function fake(err, frobs) {
+          // do stuff with frobs
+          done(err);
+        });
+
+        frob.fronicate(spy);
+
+        assert(spyWasCalled());
+        assert(spy.calls.length === 1);
+        assert(spy.calls[0].length, 2);
+        // Assert on err and frobs which are available through spy.calls
+      });
+
+   });
+```
+
+Spy behaviour can also be controlled via a fluent interface:
+
+
+```javascript
+   var iSpy = require('i-spy');
+
+   var erroringSpy = iSpy.createSpy().thatThrows(new Error('Oops'));
+
+   var returningSpy = iSpy.createSpy().thatReturns('Woohoo');
+
+   var callThroughSpy = iSpy.createSpy().thatCalls(function () {
+       // Do some stuff
+   });
+```
