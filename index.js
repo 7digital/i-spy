@@ -34,12 +34,16 @@ define(function (require, exports, module) {
 			return fake && fake.apply(spy.context, spyArgs);
 		}
 
-		// Checkers
 		spy.calls = [];
 
 		spy.reset = function reset() {
 			spy.calls = [];
 		};
+
+		// Checkers
+		spy.callCount = function callCount() {
+			return spy.calls.length;
+		}
 
 		spy.wasCalled = function wasCalled() {
 			return spy.calls.length > 0;
@@ -49,6 +53,13 @@ define(function (require, exports, module) {
 			return spy.calls.length === 0;
 		};
 
+		spy.firstCall = function firstCall() {
+			return spy.calls[0];
+		;}
+
+		spy.lastCall = function lastCall() {
+			return spy.calls[spy.calls.length - 1];
+		;}
 
 		// Fluent interface
 		spy.thatThrows = function thatThrows(err) {

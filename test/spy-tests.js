@@ -30,6 +30,20 @@ describe('spy', function () {
 			assert.lengthOf(spy.calls[1], 2, 'expected 2nd call to have 2 args');
 		});
 
+		it('allows easy access to first call', function () {
+			spy('first');
+			spy('second', 'something');
+
+			assert.equal(spy.firstCall()[0], 'first');
+		});
+
+		it('allows easy access to last call', function () {
+			spy('first');
+			spy('second', 'something');
+
+			assert.equal(spy.lastCall()[0], 'second');
+		});
+
 		it('records arguments', function () {
 			spy('one', 'two', 'three');
 
@@ -48,6 +62,13 @@ describe('spy', function () {
 			assert.lengthOf(spy.calls, 0, 'expected no calls after reset');
 			assert(spy.wasNotCalled(), 'expected no calls after reset');
 		});
+
+		it('records call count', function () {
+			spy('one', 'two', 'three');
+
+			assert.equal(spy.callCount(), 1, 'expected one call');
+		});
+
 	});
 
 	describe('fake behaviour', function () {
