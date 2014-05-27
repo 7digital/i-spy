@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "Minimal spy library with pass-through",
   "main": "index.js",
+  "publishConfig": { "registry": "http://npm-registry.nix.sys.7d:4873/" },
   "scripts": {
     "test": "mocha test/*tests.js"
   },
