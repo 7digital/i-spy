@@ -1,4 +1,4 @@
-var iSpy = require('../index');
+var iSpy = require('../i-spy');
 var assert = require('chai').assert;
 
 describe('spy', function () {
