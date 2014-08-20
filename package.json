@@ -1,9 +1,11 @@
 {
   "name": "i-spy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Minimal spy library with pass-through",
   "main": "i-spy.js",
-  "publishConfig": { "registry": "http://npm-registry.nix.sys.7d:4873/" },
+  "publishConfig": {
+    "registry": "http://npm-registry.nix.sys.7d:4873/"
+  },
   "scripts": {
     "test": "mocha test/*tests.js"
   },
