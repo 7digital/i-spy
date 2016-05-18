@@ -34,7 +34,7 @@ Simple usage:
 
       it('frobnicates', function () {
          frob.fronicate(spy);
-         assert(spy.WasCalled());
+         assert(spy.wasCalled());
          assert(spy.calls.length === 1);
          assert(spy.calls[0].length, 2);
       });
@@ -57,7 +57,7 @@ Asynchronous tests:
 
         frob.fronicate(spy);
 
-        assert(spy.WasCalled());
+        assert(spy.wasCalled());
         assert(spy.calls.length === 1);
         assert(spy.calls[0].length, 2);
         // Assert on err and frobs which are available through spy.calls
@@ -67,7 +67,6 @@ Asynchronous tests:
 ```
 
 Spy behaviour can also be controlled via a fluent interface:
-
 
 ```javascript
    var iSpy = require('i-spy');
