@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/7digital/i-spy",
   "devDependencies": {
-    "mocha": "~1.15.1",
-    "chai": "~1.8.1"
+    "mocha": "~2.5.3",
+    "chai": "~3.5.0"
   }
 }
