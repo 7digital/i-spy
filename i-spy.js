@@ -59,8 +59,8 @@ function createSpy(fn) {
 		return spy;
 	};
 
-	spy.thatReturns = function thatReturns(err) {
-		fake = returner(err);
+	spy.thatReturns = function thatReturns(returnValue) {
+		fake = returner(returnValue);
 		return spy;
 	};
 
