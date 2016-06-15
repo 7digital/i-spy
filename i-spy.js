@@ -47,11 +47,11 @@ function createSpy(fn) {
 
 	spy.firstCall = function firstCall() {
 		return spy.calls[0];
-	;}
+	};
 
 	spy.lastCall = function lastCall() {
 		return spy.calls[spy.calls.length - 1];
-	;}
+	};
 
 	// Fluent interface
 	spy.thatThrows = function thatThrows(err) {
@@ -59,7 +59,7 @@ function createSpy(fn) {
 		return spy;
 	};
 
-	spy.thatReturns = function thatThrows(err) {
+	spy.thatReturns = function thatReturns(err) {
 		fake = returner(err);
 		return spy;
 	};
