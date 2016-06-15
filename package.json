@@ -16,6 +16,7 @@
     "test",
     "spy"
   ],
+  "typings": "./i-spy.d.ts",
   "author": "7digital",
   "license": "BSD-2-Clause",
   "bugs": {
