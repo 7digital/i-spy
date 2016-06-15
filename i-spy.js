@@ -1,86 +1,77 @@
-/* jshint ignore:start */
-if (typeof module === 'object' && typeof define !== 'function') {
-	var define = function (factory) {
-		module.exports = factory(require, exports, module);
-	};
+'use strict';
+
+function thrower(err) {
+	return function () { throw err; }
 }
-/* jshint ignore:end */
 
-define(function (require, exports, module) {
+function returner(obj) {
+	return function () { return obj; }
+}
 
-	function thrower(err) {
-		return function () { throw err; }
+function createSpy(fn) {
+	var fake = fn;
+
+	if (fake !== void 0 && typeof(fn) !== 'function') {
+		if (fn instanceof Error) {
+			fake = thrower(fn);
+		} else {
+			fake = returner(fn);
+		}
 	}
 
-	function returner(obj) {
-		return function () { return obj; }
+	function spy() {
+		var spyArgs = [].slice.call(arguments);
+		spy.calls.push(spyArgs);
+		spy.context = this;
+		return fake && fake.apply(spy.context, spyArgs);
 	}
 
-	function createSpy(fn) {
-		var fake = fn;
+	spy.calls = [];
 
-		if (fake !== void 0 && typeof(fn) !== 'function') {
-			if (fn instanceof Error) {
-				fake = thrower(fn);
-			} else {
-				fake = returner(fn);
-			}
-		}
-
-		function spy() {
-			var spyArgs = [].slice.call(arguments);
-			spy.calls.push(spyArgs);
-			spy.context = this;
-			return fake && fake.apply(spy.context, spyArgs);
-		}
-
+	spy.reset = function reset() {
 		spy.calls = [];
+	};
 
-		spy.reset = function reset() {
-			spy.calls = [];
-		};
-
-		// Checkers
-		spy.callCount = function callCount() {
-			return spy.calls.length;
-		}
-
-		spy.wasCalled = function wasCalled() {
-			return spy.calls.length > 0;
-		};
-
-		spy.wasNotCalled = function wasNotCalled() {
-			return spy.calls.length === 0;
-		};
-
-		spy.firstCall = function firstCall() {
-			return spy.calls[0];
-		;}
-
-		spy.lastCall = function lastCall() {
-			return spy.calls[spy.calls.length - 1];
-		;}
-
-		// Fluent interface
-		spy.thatThrows = function thatThrows(err) {
-			fake = thrower(err);
-			return spy;
-		};
-
-		spy.thatReturns = function thatThrows(err) {
-			fake = returner(err);
-			return spy;
-		};
-
-		spy.thatCalls = function thatCalls(fn) {
-			fake = fn;
-			return spy;
-		};
-
-		return spy;
+	// Checkers
+	spy.callCount = function callCount() {
+		return spy.calls.length;
 	}
 
-	return {
-		createSpy: createSpy
+	spy.wasCalled = function wasCalled() {
+		return spy.calls.length > 0;
 	};
-});
+
+	spy.wasNotCalled = function wasNotCalled() {
+		return spy.calls.length === 0;
+	};
+
+	spy.firstCall = function firstCall() {
+		return spy.calls[0];
+	;}
+
+	spy.lastCall = function lastCall() {
+		return spy.calls[spy.calls.length - 1];
+	;}
+
+	// Fluent interface
+	spy.thatThrows = function thatThrows(err) {
+		fake = thrower(err);
+		return spy;
+	};
+
+	spy.thatReturns = function thatThrows(err) {
+		fake = returner(err);
+		return spy;
+	};
+
+	spy.thatCalls = function thatCalls(fn) {
+		fake = fn;
+		return spy;
+	};
+
+	return spy;
+}
+
+module.exports = {
+	createSpy: createSpy
+};
