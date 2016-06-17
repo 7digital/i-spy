@@ -7,8 +7,6 @@ A super simple spying library that mimics the jasmine spy API for use with
 other frameworks.  Doesn't force you into the stub / mock / fake choice like
 sinon.js.
 
-Wrapped in the UMD node adaptor for use from requirejs or nodejs.
-
 Installation (nodejs)
 ---------------------
 This module is currently under development you should install it with a git
