@@ -1,4 +1,5 @@
-declare class Spy {
+declare interface Spy {
+    (...args: any[]): any;
     calls: Array<Array<any>>;
     reset: () => void;
     callCount: () => number;
