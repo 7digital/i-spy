@@ -9,12 +9,74 @@ sinon.js.
 
 Installation (nodejs)
 ---------------------
-This module is currently under development you should install it with a git
-URL for now.
 
 ```bash
-  npm install https://github.com/7digital/i-spy
+  npm install i-spy
 ```
+Api
+-----
+`createSpy()`
+-----
+
+Returns a function spy, optionally takes a function that will be executed when the spy is called.
+
+```
+var iSpy = require('i-spy');
+var spy = iSpy.createSpy();
+var spyWithAction(function () {
+  console.log('hi');
+});
+
+spy();
+spyWithAction(); //-> hi
+
+```
+
+`spy.calls`
+-----
+
+A 2 dimentional array of all the recorded calls to the spy.
+
+```javascript
+var spy = iSpy.createSpy();
+
+spy('hello', 'world');
+spy({foo: 'bar'});
+
+spy.calls[0][0] // -> 'hello'
+spy.calls[0][1] // -> 'world'
+spy.calls[1][0] // -> '{foo: 'bar'}'
+```
+
+`spy.wasCalled()`
+-----
+Returns a boolean that determines whether a spy has been called
+
+```javascript
+var spy = iSpy.createSpy();
+
+spy.wasCalled(); // -> false
+
+spy('anything');
+spy.wasCalled(); // -> true
+```
+
+`spy.reset()`
+-----
+Clears any recorded calls on the spy
+
+```javascript
+var spy = iSpy.createSpy();
+
+spy(1);
+spy.calls.length; // -> 1
+
+spy.reset();
+
+spy.calls.length; // -> 0
+```
+
+
 
 Usage
 -----
